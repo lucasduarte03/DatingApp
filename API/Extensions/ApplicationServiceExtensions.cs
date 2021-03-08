@@ -21,7 +21,7 @@ namespace API.Extensions
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
@@ -30,11 +30,9 @@ namespace API.Extensions
 
             services.AddScoped<LogUserActivity>();
 
-            services.AddScoped<ILikesRepository,LikesRepository>();
-
-            services.AddScoped<IMessageRepository, MessageRepository>();
-
             services.AddSingleton<PresenceTracker>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
